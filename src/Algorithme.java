@@ -6,19 +6,16 @@ public class Algorithme {
     private List<Vertex> vertexlist;
     private List<Edge> edgeList;
     private LinkedList<LinkedList<Double>> distances;
-    private LinkedList<String> shortestPath;
 
 
     public Algorithme(List<Vertex> vertexlist, List<Edge>edgeList){
         this.vertexlist=vertexlist;
         this.edgeList=edgeList;
-        this.shortestPath = new LinkedList<String>();
     }
 
     public void shortestPath(Vertex sourcevertex, Vertex targetvertex){
         // init distance of initial Vertex at zero
         sourcevertex.setDistanceMin(0);
-        this.shortestPath.add(sourcevertex.toString());
 
         int size = this.vertexlist.size();
         for(int i=0;i<size-1;i++){
@@ -32,12 +29,11 @@ public class Algorithme {
                 Vertex u=edge.getTargetVertex();
 
                 double newDistance =v.getDistanceMin()+edge.getWeight();
-                if(!shortestPath.contains(u.toString()))
-                    shortestPath.add(u.toString());
                 if(newDistance<u.getDistanceMin()){
                     u.setDistanceMin(newDistance);
                     u.setPreviousVertex(v);
-                    this.shortestPath.set(this.shortestPath.size()-1, u.toString());
+
+
                 }
 
             }
@@ -46,8 +42,7 @@ public class Algorithme {
         }
         if(targetvertex.getDistanceMin()!=Double.MAX_VALUE){
             System.out.println("The Shortest Path is : "+
-                    targetvertex.getDistanceMin() +
-                    " The Path is "+this.shortestPath);
+                    targetvertex.getDistanceMin());
         }else{
             System.out.println("there is not sortest path");
 
